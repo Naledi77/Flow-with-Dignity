@@ -44,11 +44,11 @@ Timeline and Milestones Week Milestone 1 Idea approved, content planning begins 
 <img width="568" height="355" alt="Flow with Dignity Sitemap" src="https://github.com/user-attachments/assets/41997678-91db-4810-b86c-5b50d71c5796" />
 
 # Refrencing
-Barnard, B.L. (no date) Creating your first wireframe. Available at: https://balsamiq.com/learn/first-wireframe/ (Accessed: [insert date]). 
+Barnard, B.L. (no date) Creating your first wireframe. Available at: https://balsamiq.com/learn/first-wireframe/ (Accessed:27 September 2025). 
 
-Kucheriavy, A. (2024) Best examples of website goals and objectives. Available at: https://www.intechnic.com/blog/best-examples-of-website-goals-and-objectives/ (Accessed: [insert date]). 
+Kucheriavy, A. (2024) Best examples of website goals and objectives. Available at: https://www.intechnic.com/blog/best-examples-of-website-goals-and-objectives/ (Accessed:27 September 2025). 
 
-Non-Profit Organization (NPO) information (no date). Available at: https://www.westerncape.gov.za/service/non-profit-organisation-npo-information (Accessed: [insert date]). 
+Non-Profit Organization (NPO) information (no date). Available at: https://www.westerncape.gov.za/service/non-profit-organisation-npo-information (Accessed:27 September 2025). 
 
 Period poverty costs too much, take action to end it | UN Women – Headquarters (2024). Available at: https://www.unwomen.org/en/news-stories/explainer/2024/05/period-poverty-costs-too-much-take-action-to-end-it (Accessed: [insert date]). 
 
