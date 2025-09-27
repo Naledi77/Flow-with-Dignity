@@ -41,4 +41,19 @@ Proposed Website Features and Functionality
 Timeline and Milestones Week Milestone 1 Idea approved, content planning begins 2 Wireframes and design layout completed 3 Basic structure coded (HTML/CSS) 4 Functionality added (forms, links) 5 Mobile responsiveness tested 6 Final review and adjustments 7 Website presented/submitted
 
 # Sitemap
-![alt text](image.png)
+<img width="568" height="355" alt="Flow with Dignity Sitemap" src="https://github.com/user-attachments/assets/41997678-91db-4810-b86c-5b50d71c5796" />
+
+# Refrencing
+Barnard, B.L. (no date) Creating your first wireframe. Available at: https://balsamiq.com/learn/first-wireframe/ (Accessed: [insert date]). 
+
+Kucheriavy, A. (2024) Best examples of website goals and objectives. Available at: https://www.intechnic.com/blog/best-examples-of-website-goals-and-objectives/ (Accessed: [insert date]). 
+
+Non-Profit Organization (NPO) information (no date). Available at: https://www.westerncape.gov.za/service/non-profit-organisation-npo-information (Accessed: [insert date]). 
+
+Period poverty costs too much, take action to end it | UN Women – Headquarters (2024). Available at: https://www.unwomen.org/en/news-stories/explainer/2024/05/period-poverty-costs-too-much-take-action-to-end-it (Accessed: [insert date]). 
+
+The Citizen (2022) North Shopping Centre joins school sanitary pad campaign, Rekord. 24 July. Available at: https://www.citizen.co.za/rekord/news-headlines/2022/07/24/north-shopping-scentre-joins-school-sanitary-pad-campaign/ (Accessed: [insert date]). 
+
+World Bank (no date) Menstrual health and hygiene. Available at: https://www.worldbank.org/en/topic/water/brief/menstrual-health-and-hygiene (Accessed: [insert date]). 
+
+ 
