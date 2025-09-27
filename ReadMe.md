@@ -52,8 +52,10 @@ Non-Profit Organization (NPO) information (no date). Available at: https://www.w
 
 Period poverty costs too much, take action to end it | UN Women – Headquarters (2024). Available at: https://www.unwomen.org/en/news-stories/explainer/2024/05/period-poverty-costs-too-much-take-action-to-end-it (Accessed: [insert date]). 
 
-The Citizen (2022) North Shopping Centre joins school sanitary pad campaign, Rekord. 24 July. Available at: https://www.citizen.co.za/rekord/news-headlines/2022/07/24/north-shopping-scentre-joins-school-sanitary-pad-campaign/ (Accessed: [insert date]). 
+The Citizen (2022) North Shopping Centre joins school sanitary pad campaign, Rekord. 24 July. Available at: https://www.citizen.co.za/rekord/news-headlines/2022/07/24/north-shopping-scentre-joins-school-sanitary-pad-campaign/. 
 
 World Bank (no date) Menstrual health and hygiene. Available at: https://www.worldbank.org/en/topic/water/brief/menstrual-health-and-hygiene (Accessed: [insert date]). 
+W3Schools, n.d. CSS Fonts. [online] Available at: https://www.w3schools.com/css/css_font.asp
+ [Accessed 27 September 2025].
 
  
