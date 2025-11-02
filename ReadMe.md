@@ -25,6 +25,26 @@ Edited my wireframes using Word
 
 Improved the budget estimated by allocating funds to different activities of a web development project
 
+# Updated Change Log
+Implemented Javascript into my code
+
+Applied SEO best practices to my website
+
+Add features that make your website engaging such as: Accordions/Tabs: 
+    Expandable content sections,
+    Modals: Popup windows, 
+    Interactive Map,
+    Animations/Transitions, and
+    Lightbox Gallery
+
+Added Sitemap and Robots file
+
+Coded Enquiry forms
+
+Updated my css
+
+
+
 # Project Overview
 Project Overview Flow with Dignity is a non-profit organization founded in 2024 by Naledi Mofokeng, to help young girls in schools who cant afford sanitary pads.The orgaisation started as a small initiative in local schools and grew through donations and community, and it now now helps women who cant afford sanitary pads as well in the community.
 

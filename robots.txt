@@ -1,0 +1,14 @@
+# robots.txt - Flow with Dignity
+
+# Allow all search engines to index the main pages
+User-agent: *
+Allow: /
+
+# Disallow any sensitive or temporary pages
+Disallow: /js/
+Disallow: /css/
+Disallow: /admin/
+Disallow: /temp/
+
+# Sitemap location
+Sitemap: https://flowwithdignity.org/sitemap.xml
