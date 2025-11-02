@@ -1,73 +1,266 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flow with Dignity Gallery</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gallery — Flow with Dignity</title>
+  <meta name="description" content="Photo gallery of donation drives, workshops and community events." />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ---------- Gallery page styles (move into styles.css if desired) ---------- */
+    :root{
+      --bg:#fafafa;
+      --card:#ffffff;
+      --accent:#c59d00;
+      --muted:#6b6b6b;
+      --radius:12px;
+      --shadow: 0 10px 30px rgba(18, 18, 18, .08);
+      --glass: rgba(255,255,255,0.06);
+    }
+    body { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin:0; background:var(--bg); color:#111; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+    header { display:flex; align-items:center; gap:1rem; padding:1rem 1.5rem; background:linear-gradient(90deg, #fff 0%, #fff 100%); box-shadow:0 2px 8px rgba(0,0,0,.03); }
+    header img { height:56px; width:auto; display:block; }
+    .nav { list-style:none; margin:0; padding:0; display:flex; gap:1rem; align-items:center; }
+    .nav a { text-decoration:none; color:#333; font-weight:600; font-size:.95rem; }
+
+    main { max-width:1200px; margin:2rem auto; padding:0 1rem; }
+    h1 { margin:0 0 0.5rem; font-size:1.6rem; letter-spacing:-0.2px; }
+    p.lead { color:var(--muted); margin:0 0 1.4rem; }
+
+    /* Grid */
+    .gallery-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap:14px; }
+    @media (max-width:1000px){ .gallery-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width:700px){ .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+    .gallery-item { position:relative; overflow:hidden; border-radius:10px; background:var(--card); box-shadow:var(--shadow); cursor:zoom-in; }
+    .gallery-item img { display:block; width:100%; height:100%; object-fit:cover; transition: transform 450ms cubic-bezier(.2,.8,.2,1), filter 300ms ease; transform-origin:center; }
+    .gallery-item:hover img { transform:scale(1.08); filter:brightness(.95); }
+
+    .gallery-item .meta { position:absolute; left:10px; bottom:10px; background:rgba(0,0,0,.5); color:#fff; padding:6px 10px; border-radius:999px; font-size:.85rem; backdrop-filter: blur(4px); }
+
+    /* Lightbox overlay */
+    .lb-overlay { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background: linear-gradient(180deg, rgba(0,0,0,.85), rgba(0,0,0,.9)); z-index:1400; padding:20px; }
+    .lb-wrap { width:100%; max-width:1100px; max-height:92vh; display:flex; flex-direction:column; gap:12px; align-items:center; }
+    .lb-stage { position:relative; width:100%; height:calc(92vh - 140px); display:flex; align-items:center; justify-content:center; }
+    .lb-stage img { max-width:100%; max-height:100%; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,.6); transition: transform .45s ease, opacity .35s ease; }
+    .lb-caption-row { display:flex; align-items:center; justify-content:space-between; width:100%; gap:12px; color:#fff; }
+
+    /* Controls */
+    .lb-btn { position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.12); width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-size:20px; cursor:pointer; transition: transform .15s ease, background .15s ease; }
+    .lb-btn:hover{ transform:translateY(-50%) scale(1.06); background:rgba(255,255,255,.12); }
+    .lb-prev { left:6px; }
+    .lb-next { right:6px; }
+    .lb-close { position:absolute; right:6px; top:6px; width:44px; height:44px; background:rgba(255,255,255,.9); color:#111; border-radius:8px; font-weight:700; font-size:18px; border:none; cursor:pointer; z-index:1500; }
+
+    .lb-caption { font-size:1rem; color:#fff; text-align:center; flex:1; }
+    .lb-counter { color:#ddd; font-weight:600; font-size:.95rem; margin-left:12px; }
+
+    /* Thumbnail strip */
+    .lb-thumbs { display:flex; gap:8px; overflow:auto; width:100%; padding:8px 6px; background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01)); border-radius:8px; }
+    .lb-thumb { width:90px; height:60px; flex:0 0 auto; border-radius:6px; overflow:hidden; border:2px solid transparent; cursor:pointer; }
+    .lb-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .lb-thumb.active { border-color:var(--accent); box-shadow:0 6px 20px rgba(197,157,0,.12); transform:scale(1.02); }
+
+    /* accessibility focus */
+    button:focus, a:focus { outline:3px solid rgba(197,157,0,.18); outline-offset:2px; }
+
+    /* subtle entrance */
+    .lb-overlay.show { display:flex; animation: fadeIn .18s ease both; }
+    @keyframes fadeIn { from { opacity:0; transform: translateY(6px); } to { opacity:1; transform:none; } }
+  </style>
 </head>
 <body>
-     <header>
-    <img src="_images/Flow_with_Dignity_Logo_nbg.png" alt="">
-     <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="products_services.html">Products and Services</a></li>
-                <li><a href="contact_us.html">Contact us</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header>
+    <a href="index.html" aria-label="Home"><img src="_images/Flow_with_Dignity_Logo_nbg.png" alt="Flow with Dignity logo" width="120" loading="lazy"></a>
+    <nav aria-label="Main"><ul class="nav"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="products_services.html">Products & Services</a></li><li><a href="contact_us.html">Contact</a></li></ul></nav>
+  </header>
 
-    <main>
-        <section>
-            <h1>Our Gallery</h1>
-            <p>Take a look at our journey in pictures, from donation drives to awareness campaigns, each moment tells a story of dignity restored and hope shared.</p>
-        </section>
+  <main>
+    <h1>Our Gallery</h1>
+    <p class="lead">Moments from drives, workshops and community outreach — click an image to open the viewer and slide through the gallery.</p>
 
-        <section class="gallery-container">
-            <div class="gallery-item">
-                <img src="_images/picture_1_nbg.jpg" alt="Period poverty awareness marching">
-                <p>Period poverty awareness marching</p>
-            </div>
-            <div class="gallery-item">
-                <img src="_images/pic_2_nbg.jpg" alt="">
-                <p>Happy girls who got their pads and hygiene kits</p>
-            </div>
-            <div class="gallery-item">
-                <img src="_images/pic_3_nbg.png" alt="">
-                <p>Gifting young girls who attended a workshop</p>
-            </div>
-             <div class="gallery-item">
-                <img src="_images/pic_4_nbg.jpg" alt="">
-                <p>Another "End Period Poverty" protest</p>
-             </div>
-             <div class="gallery-item">
-                <img src="_images/pad_campaign_nbg.jpg" alt="">
-                <p>Community donation drive in partnership with local businesses.</p>
-             </div>
-             <div class="gallery-item">
-                <img src="_images/period_awareness_nbg.jpeg" alt="">
-                <p>Volunteers engaging in Q&A session with learners.</p>
-             </div>
+    <section class="gallery-grid" id="galleryGrid" aria-label="Photo gallery">
+      <!-- Replace/add images as desired (data-full is the large image) -->
+      <figure class="gallery-item">
+        <img src="_images/picture_1_nbg.jpg" data-full="_images/picture_1_nbg.jpg" alt="Period poverty awareness marching" loading="lazy">
+        <div class="meta">Awareness march</div>
+      </figure>
+
+      <figure class="gallery-item">
+        <img src="_images/pic_2_nbg.jpg" data-full="_images/pic_2_nbg.jpg" alt="Girls receiving hygiene kits" loading="lazy">
+        <div class="meta">Receiving kits</div>
+      </figure>
+
+      <figure class="gallery-item">
+        <img src="_images/pic_3_nbg.png" data-full="_images/pic_3_nbg.png" alt="Gifting at a workshop" loading="lazy">
+        <div class="meta">Workshop giveaway</div>
+      </figure>
+
+      <figure class="gallery-item">
+        <img src="_images/pad_campaign_nbg.jpg" data-full="_images/pad_campaign_nbg.jpg" alt="Community donation drive" loading="lazy">
+        <div class="meta">Community drive</div>
+      </figure>
+
+      <figure class="gallery-item">
+        <img src="_images/period_awareness_nbg.jpeg" data-full="_images/period_awareness_nbg.jpeg" alt="Volunteers doing Q&A session" loading="lazy">
+        <div class="meta">Q&A session</div>
+      </figure>
+
+      <!-- add more figures as needed -->
     </section>
-    </main>
+  </main>
 
-     <footer>
-         <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="products_services.html">Products and Services</a></li>
-                <li><a href="contact_us.html">Contact us</a></li>
-            </ul>
-        </nav>
-        <p>&copy; 2025 Flow with Dignity | Every picture tells you our story</p>
+  <!-- Lightbox / slideshow overlay -->
+  <div class="lb-overlay" id="lbOverlay" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Image viewer">
+    <div class="lb-wrap" role="document">
+      <div class="lb-stage" id="lbStage">
+        <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous image">◀</button>
+        <img id="lbImage" src="" alt="" />
+        <button class="lb-btn lb-next" id="lbNext" aria-label="Next image">▶</button>
+        <button class="lb-close" id="lbClose" aria-label="Close viewer">✕</button>
+      </div>
 
-    </footer>
-    
-    
+      <div class="lb-caption-row">
+        <div class="lb-caption" id="lbCaption"></div>
+        <div class="lb-counter" id="lbCounter">0 / 0</div>
+      </div>
+
+      <div class="lb-thumbs" id="lbThumbs" aria-hidden="false"></div>
+    </div>
+  </div>
+
+  <footer>
+    <nav aria-label="Footer"><ul class="nav"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="products_services.html">Products & Services</a></li><li><a href="contact_us.html">Contact</a></li></ul></nav>
+    <p>&copy; 2025 Flow with Dignity</p>
+  </footer>
+
+  <!-- ---------- Gallery JS: lightbox, slide, keyboard, touch ---------- -->
+  <script>
+    (function(){
+      const galleryGrid = document.getElementById('galleryGrid');
+      const overlay = document.getElementById('lbOverlay');
+      const stageImage = document.getElementById('lbImage');
+      const captionEl = document.getElementById('lbCaption');
+      const counterEl = document.getElementById('lbCounter');
+      const thumbsEl = document.getElementById('lbThumbs');
+      const btnPrev = document.getElementById('lbPrev');
+      const btnNext = document.getElementById('lbNext');
+      const btnClose = document.getElementById('lbClose');
+
+      // collect gallery items
+      const nodes = Array.from(galleryGrid.querySelectorAll('img[data-full]'));
+      const items = nodes.map((img, idx) => ({
+        full: img.dataset.full || img.src,
+        thumb: img.src,
+        alt: img.alt || '',
+        index: idx
+      }));
+      let current = 0;
+
+      if(!items.length) return;
+
+      // build thumbnails in overlay
+      items.forEach(it => {
+        const t = document.createElement('div');
+        t.className = 'lb-thumb';
+        t.dataset.index = it.index;
+        t.innerHTML = `<img src="${it.thumb}" alt="${it.alt}">`;
+        t.addEventListener('click', () => openAt(Number(t.dataset.index)));
+        thumbsEl.appendChild(t);
+      });
+
+      const thumbNodes = Array.from(thumbsEl.children);
+
+      function setActiveThumb(i){
+        thumbNodes.forEach(n => n.classList.remove('active'));
+        const active = thumbNodes[i];
+        if(active){
+          active.classList.add('active');
+          // ensure thumb visible in strip
+          active.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+        }
+      }
+
+      function openAt(i){
+        current = (i + items.length) % items.length;
+        const it = items[current];
+        // graceful fade: set opacity to 0 then update src then fade
+        stageImage.style.opacity = '0';
+        setTimeout(() => {
+          stageImage.src = it.full;
+          stageImage.alt = it.alt;
+          captionEl.textContent = it.alt;
+          counterEl.textContent = (current + 1) + ' / ' + items.length;
+          setActiveThumb(current);
+          stageImage.style.opacity = '1';
+        }, 100);
+        overlay.classList.add('show');
+        overlay.setAttribute('aria-hidden','false');
+        // trap focus to close for keyboard users
+        btnClose.focus();
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeOverlay(){
+        overlay.classList.remove('show');
+        overlay.setAttribute('aria-hidden','true');
+        stageImage.src = '';
+        captionEl.textContent = '';
+        document.body.style.overflow = '';
+      }
+
+      function showNext(){ openAt(current + 1); }
+      function showPrev(){ openAt(current - 1); }
+
+      // attach click events on thumbnails in page
+      nodes.forEach((n, idx) => {
+        n.style.cursor = 'zoom-in';
+        n.addEventListener('click', () => openAt(idx));
+        n.addEventListener('keydown', (e) => { if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openAt(idx); } });
+        n.setAttribute('tabindex', '0');
+      });
+
+      // control events
+      btnNext.addEventListener('click', showNext);
+      btnPrev.addEventListener('click', showPrev);
+      btnClose.addEventListener('click', closeOverlay);
+      overlay.addEventListener('click', (e) => { if(e.target === overlay) closeOverlay(); });
+
+      // keyboard navigation
+      window.addEventListener('keydown', (e) => {
+        if(overlay.classList.contains('show')){
+          if(e.key === 'Escape') closeOverlay();
+          if(e.key === 'ArrowRight') showNext();
+          if(e.key === 'ArrowLeft') showPrev();
+        }
+      });
+
+      // touch-swipe support for stageImage
+      (function addTouch(){
+        let startX = 0, startTime = 0;
+        const minDist = 40, maxTime = 700;
+        stageImage.addEventListener('touchstart', (e) => {
+          const t = e.touches[0];
+          startX = t.clientX; startTime = Date.now();
+        }, {passive:true});
+        stageImage.addEventListener('touchend', (e) => {
+          const t = e.changedTouches[0];
+          const dx = t.clientX - startX;
+          const dt = Date.now() - startTime;
+          if(Math.abs(dx) > minDist && dt < maxTime){
+            if(dx < 0) showNext(); else showPrev();
+          }
+        });
+      })();
+
+      // preload neighbors to make sliding feel instant
+      stageImage.addEventListener('load', () => {
+        const next = new Image(); next.src = items[(current + 1) % items.length].full;
+        const prev = new Image(); prev.src = items[(current - 1 + items.length) % items.length].full;
+      });
+
+      // initial accessibility attributes
+      overlay.setAttribute('aria-hidden','true');
+    })();
+  </script>
 </body>
 </html>

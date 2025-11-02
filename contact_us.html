@@ -1,65 +1,87 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us Page</title>
-     <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact Us — Flow with Dignity</title>
+  <meta name="description" content="Contact Flow with Dignity — address, email and contact form for donations, volunteering and general enquiries." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="canonical" href="https://yourdomain.example/contact_us.html" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
+  <header>
+    <a href="index.html"><img src="_images/Flow_with_Dignity_Logo_nbg.png" alt="Flow with Dignity logo" width="120" loading="lazy"></a>
+    <nav aria-label="Main"><ul class="nav"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="products_services.html">Products & Services</a></li><li><a href="contact_us.html">Contact</a></li></ul></nav>
+  </header>
 
-    <header>
-        <img src="_images/Flow_with_Dignity_Logo_nbg.png" alt="Flow_with_Dignity_Logo_nbg">
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-               <li><a href="about.html">About</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="products_services.html">Products and Services</a></li>
-                <li><a href="contact_us.html">Contact us</a></li>
-            </ul>
-        </nav>
-    </header>
+  <main>
+    <h1>Contact Us</h1>
 
-    <main>
-        <h1>Contact Us</h1>
-        <li>Physical Adress: 72 Hole-In-One Ave, Ruimsig, Rooderport, 1724</li>
-        <li>Email: flowdignity@gmail.com</li>
-        <li>Contact number: 068 582 2593</li>
+    <section aria-labelledby="contact-details">
+      <h2 id="contact-details">Contact details</h2>
+      <address>
+        Physical address: 72 Hole-In-One Ave, Ruimsig, Roodepoort, 1724<br>
+        Email: <a href="mailto:flowdignity@gmail.com">flowdignity@gmail.com</a><br>
+        Phone: <a href="tel:+27685822593">068 582 2593</a>
+      </address>
 
-        <h1>Connect with Us</h1>
-        <li><strong>Instagram:</strong> Flow_with_Dignity</li>
-        <li><strong>Facebook:</strong> Flow_with_Dignity</li>
-        <li><strong>Tiktok:</strong> Flow_with_Dignity</li>
+      <h3>Operational hours</h3>
+      <p>Mon–Sat: 8:00 — 17:00</p>
+      <p>Sundays and Public holidays: Closed</p>
 
-        <h1>Operational Hours</h1>
-        <p><strong>Mondays</strong>: 8am - 5pm</p>
-        <p><strong>Tuesday</strong>: 8am - 5pm</p>
-        <p><strong>Wednesday</strong>:8am - 5pm</p>
-        <p><strong>Thursday</strong>: 8am - 5pm</p>
-        <p><strong>Friday</strong>:8am - 5pm</p>
+      <!-- Social Media Section -->
+    <section aria-labelledby="social-media">
+      <h2 id="social-media">Connect with us on Social Media</h2>
+      <ul class="social-media">
+        <li>Facebook: Flow_With_Dignity</li>
+        <li>Instagram: Flow_With_Dignity</li>
+        <li>Twitter: Flow_With_Dignity</li>
+        <li>LinkedIn: Flow With Dignity</li>
+      </ul>
+    </section>
 
-        <h1>Find Us</h1>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3583.284243730863!2d27.869728199999997!3d-26.089638500000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e959ef166c3b533%3A0x5f074999fe8e299e!2sRuimsig%20Office%20Estate!5e0!3m2!1sen!2sza!4v1756239454243!5m2!1sen!2sza" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
-        <h1>Contact Form</h1>
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfJA_P7Zg44KAUk81Pg2LVhpKdPFVHYKbexuZKwAwCocuDvjQ/viewform?embedded=true" width="640" height="1279" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-    </main>
+      <h3>Find us</h3>
+      <div id="mapContact" style="height:300px;border-radius:8px;"></div>
+    </section>
 
-    <footer>
-         <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="products_services.html">Products and Services</a></li>
-                <li><a href="contact_us.html">Contact us</a></li>
-            </ul>
-            <p>&copy; 2025 Flow with Dignity | Stay connected, stay informed</p>
-        </nav>
+    <p>Use this form to ask about services, volunteering or sponsorship. After validation, you'll see an estimated response (cost/availability) or you can opt to send the enquiry to our email.</p>
 
-    </footer>
+    <form id="enquiryForm" novalidate>
+      <label>Full name <input name="name" required minlength="2"></label>
+      <label>Email <input name="email" type="email" required></label>
+      <label>Phone <input name="phone" pattern="[0-9+ ]{7,15}" placeholder="+27 68 555 1234"></label>
+      <label>Enquiry type
+        <select name="type" required>
+          <option value="">Select...</option>
+          <option value="service">Service info</option>
+          <option value="volunteer">Volunteer</option>
+          <option value="sponsor">Sponsor</option>
+        </select>
+      </label>
+      <label>Message <textarea name="message" required minlength="10"></textarea></label>
 
-    
+      <div style="display:flex;gap:.5rem;margin-top:.5rem;">
+        <button type="submit">Submit enquiry</button>
+        <button type="button" id="enquiryReset">Reset</button>
+      </div>
+
+      <div id="enquiryResult" aria-live="polite" style="margin-top:.5rem;"></div>
+    </form>
+  </main>
+
+  <footer>
+    <nav aria-label="Footer"><ul class="nav"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="products_services.html">Products & Services</a></li><li><a href="contact_us.html">Contact</a></li></ul></nav>
+    <p>&copy; 2025 Flow with Dignity</p>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // Map coordinates (Ruimsig / Roodepoort example) - replace if needed
+    FlowSite.initLeaflet('mapContact', -26.0896385, 27.8697282, 'Flow with Dignity - Ruimsig');
+    FlowSite.initContactPageForm('contactForm','contactFormResult');
+  </script>
 </body>
 </html>

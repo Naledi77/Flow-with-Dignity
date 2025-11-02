@@ -1,63 +1,146 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flow with Dignity Homepage</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Flow with Dignity — Home</title>
+  <meta name="description" content="Flow with Dignity provides menstrual products and support to underprivileged girls. Donate, volunteer, or sponsor a hygiene kit." />
+  <meta name="keywords" content="menstrual health, sanitary pads, donate, volunteer, Flow with Dignity" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="canonical" href="https://yourdomain.example/" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <meta property="og:title" content="Flow with Dignity — Help girls in need" />
+  <meta property="og:description" content="Donate, volunteer or sponsor to help girls manage their periods with dignity." />
+  <meta property="og:image" content="https://yourdomain.example/_images/og-image.jpg" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"NGO","name":"Flow with Dignity","url":"https://yourdomain.example/","logo":"https://yourdomain.example/_images/Flow_with_Dignity_Logo_nbg.png"}
+  </script>
+  <style>
+    /* minimal inline helpers for index (modal/lightbox) */
+    .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);align-items:center;justify-content:center;z-index:1000}
+    .modal-inner{background:#fff;padding:1rem;border-radius:8px;max-width:640px;width:94%}
+    .gallery img{cursor:pointer;max-width:150px;border-radius:6px}
+    .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);align-items:center;justify-content:center;z-index:1100}
+  </style>
 </head>
 <body>
+  <header>
+    <a href="index.html" aria-label="Home"><img src="_images/Flow_with_Dignity_Logo_nbg.png" alt="Flow with Dignity logo" width="120" loading="lazy"></a>
+    <nav aria-label="Main navigation">
+      <ul class="nav"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="products_services.html">Products & Services</a></li><li><a href="contact_us.html">Contact</a></li></ul>
+    </nav>
+    <h1>Flow with Dignity</h1>
+    <p>Helping underprivileged girls manage their periods with dignity, confidence and hope.</p>
+  </header>
 
-     <header>
-        <img src="_images/Flow_with_Dignity_Logo_nbg.png" alt="Flow_with_Dignity_Logo_nbg">
-         <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-               <li><a href="about.html">About</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="products_services.html">Products and Services</a></li>
-                <li><a href="contact_us.html">Contact us</a></li>
-            </ul>
-        </nav>
-         <h1>Flow with Dignity</h1>
-        <p>Helping underprivileged girls manage their periods with dignity, confidence, and hope.</p>
-    </header>
+  <main>
+    <section aria-labelledby="welcome">
+      <h2 id="welcome">Welcome to Flow</h2>
+      <p>Flow with Dignity provides menstrual products and support — we believe periods should never stop a girl from learning, growing and thriving.</p>
+    </section>
 
-    <main>
-        <section>
-            <h2>Welcome to Flow</h2>
-            <p>The aim of Flow with Dignity is to bring back dignity, confidence, and comfort to every girl by providing her with the menstrual products she needs, not as a luxury but a basic need. We want every single girl to feel seen, supported, and empowered throughout her menstrual cycle, knowing she’s not alone and doesn’t have to worry about her basic needs to sanitary pads and all the products needed during her period cycle</p>
-        </section>
-
-        <section>
-            <h2>Upcoming Campaigns</h2>
-            <ul>
-                <li><strong>07 October 2025:</strong>"Pads Progress" drive in local schools</li>
-                <li><strong>12 December 2025:</strong>Holiday donation event - sponsor a hygiene kit</li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>How You Can Help</h2>
-            <p>Be part of the change:</p>
-            <ul>
-                <li><a href="contact_us.html">Donate sanitary pads or funds</a></li>
-                <li><a href="contact_us.html">Volunteer your time</a></li>
-                <li>Share our mission on social media</li>
-            </ul>
-        </section>
-    </main>
-
-    <footer>
-         <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="products_services.html">Products and Services</a></li>
-        <li><a href="contact_us.html">Contact us</a></li>
-        </ul>
-        <p>&copy; 2025 Flow with Dignity | All Rights Reserved</p>
-    </footer>
+    <section aria-labelledby="campaigns">
+      <h2 id="campaigns">Upcoming Campaigns</h2>
+      <label for="campaignSearch" class="sr-only">Search campaigns</label>
+      <input id="campaignSearch" type="search" placeholder="Search campaigns by name, date or location" />
+      <div id="campaignList" aria-live="polite" style="margin-top:.75rem;"></div>
+      <section aria-labelledby="campaigns">
   
+    <ul class="events-list">
+    <li>
+      <strong>15 November 2025:</strong> Winter Warm Packs Drive — Roodepoort Community Hall
+      <p>Collecting pads and warm-care kits for learners before the winter school term.</p>
+    </li>
+    <li>
+      <strong>20 January 2026:</strong> Volunteer Orientation & Training — Flow with Dignity HQ
+      <p>Training for new volunteers covering distribution and safety practices.</p>
+    </li>
+    <li>
+      <strong>10 February 2026:</strong> Back-to-School Pad Drive — Ruimsig Primary School
+      <p>Helping learners start the year with confidence and dignity.</p>
+    </li>
+    <li>
+      <strong>8 March 2026:</strong> International Women’s Day Workshop — Riverbend High School
+      <p>Workshops on menstrual health, confidence and empowerment.</p>
+    </li>
+    <li>
+      <strong>18 April 2026:</strong> Community Clean-Up & Awareness Walk — Westgate Park
+      <p>A walk and talk about hygiene awareness and community involvement.</p>
+    </li>
+    <li>
+      <strong>16 May 2026:</strong> Community Partner Day — Local Business Park
+      <p>Partner meet-up to expand pad bank sponsorships and corporate donations.</p>
+    </li>
+    <li>
+      <strong>1 June 2026:</strong> Youth Month Pad Drive — Johannesburg Youth Centre
+      <p>Celebrate Youth Month by supporting young girls in need.</p>
+    </li>
+    <li>
+      <strong>4 July 2026:</strong> Mid-Year Fundraiser & Charity Walk — City Park
+      <p>Join our charity walk to raise funds for pad production and education.</p>
+    </li>
+    <li>
+      <strong>9 August 2026:</strong> Women’s Day Celebration & Outreach — Flow with Dignity HQ
+      <p>Celebrating women and distributing care packs to local schools.</p>
+    </li>
+  </ul>
+</section>
+
+    </section>
+
+    <section aria-labelledby="help">
+      <h2 id="help">How You Can Help</h2>
+      <ul>
+        <li><a href="contact_us.html">Donate sanitary pads or funds</a></li>
+        <li><a href="contact_us.html">Volunteer your time</a></li>
+        <li><a href="#" id="shareMission">Share our mission</a></li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="gallery">
+      <h2 id="gallery">Photo highlights</h2>
+      <div class="gallery" id="gallery">
+        <img src="_images/period_awareness_nbg.jpeg" data-full="_images/volunteers.jpg" alt="" loading="lazy">
+        <img src="_images/picture_1_nbg.jpg" data-full="_images/distribution.jpg" alt="" loading="lazy">
+      </div>
+    </section>
+
+    <button id="openQuickContact" aria-haspopup="dialog">Quick contact</button>
+
+    <!-- quick contact modal -->
+    <div id="quickContactModal" class="modal" role="dialog" aria-hidden="true" aria-labelledby="quickContactTitle">
+      <div class="modal-inner">
+        <button id="quickContactClose" aria-label="Close">×</button>
+        <h3 id="quickContactTitle">Quick contact</h3>
+        <form id="quickContactForm" novalidate>
+          <label>Name <input name="qname" required minlength="2"></label>
+          <label>Email <input name="qemail" type="email" required></label>
+          <label>Message <textarea name="qmessage" required minlength="10"></textarea></label>
+          <div><button type="submit">Send</button> <button type="button" id="quickContactCancel">Cancel</button></div>
+          <div id="quickContactResult" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <nav aria-label="Footer">
+      <ul class="nav"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="products_services.html">Products & Services</a></li><li><a href="contact_us.html">Contact</a></li></ul>
+    </nav>
+    <p>&copy; 2025 Flow with Dignity</p>
+  </footer>
+
+  <!-- scripts -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // initialize page-specific features
+    FlowSite.renderCampaigns('campaignList','campaignSearch');
+    FlowSite.initLeaflet('map', -26.0896385, 27.8697282, 'Flow with Dignity - Ruimsig Office'); // replace coordinates if needed
+    FlowSite.initLightbox('#gallery');
+    FlowSite.initModal('#openQuickContact','quickContactModal','#quickContactClose','#quickContactCancel');
+    FlowSite.initQuickContact('quickContactForm','quickContactResult');
+    FlowSite.initShare('#shareMission');
+  </script>
 </body>
 </html>
