@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Enquiry — Flow with Dignity</title>
+  <meta name="description" content="Send enquiries about services, volunteering or sponsorship to Flow with Dignity." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="canonical" href="https://flowwithdignity.org/enquiry.html" />
+</head>
+<body>
+  <header>
+    <a href="index.html"><img src="_images/Flow_with_Dignity_Logo_nbg.png" alt="Flow with Dignity logo" width="120" loading="lazy"></a>
+    <nav aria-label="Main">
+      <ul class="nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="products_services.html">Products & Services</a></li>
+        <li><a href="contact_us.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Send an enquiry</h1>
+    <p>Use this form to ask about services, volunteering or sponsorship. After validation, you'll see an estimated response or you can opt to send the enquiry to our email.</p>
+
+    <form id="enquiryForm" novalidate>
+      <label>Full name <input name="name" required minlength="2"></label>
+      <label>Email <input name="email" type="email" required></label>
+      <label>Phone <input name="phone" pattern="[0-9+ ]{7,15}" placeholder="+27 68 555 1234"></label>
+
+      <label>Location <input name="location" placeholder="City / Area" required></label>
+
+      <label>Preferred contact method
+        <select name="contactMethod" required>
+          <option value="">Select...</option>
+          <option value="email">Email</option>
+          <option value="phone">Phone call</option>
+          <option value="whatsapp">WhatsApp</option>
+        </select>
+      </label>
+
+      <label>Enquiry type
+        <select name="type" required>
+          <option value="">Select...</option>
+          <option value="service">Service info</option>
+          <option value="volunteer">Volunteer</option>
+          <option value="sponsor">Sponsor</option>
+          <option value="partnership">Partnership</option>
+        </select>
+      </label>
+
+      <label>Preferred days/times for contact
+        <input name="availability" placeholder="e.g. Weekdays after 3 PM">
+      </label>
+
+      <label>How did you hear about us?
+        <select name="referral">
+          <option value="">Select...</option>
+          <option value="social-media">Social media</option>
+          <option value="friend">Friend or family</option>
+          <option value="school">School or organisation</option>
+          <option value="event">Event or campaign</option>
+          <option value="other">Other</option>
+        </select>
+      </label>
+
+      <label>Message <textarea name="message" required minlength="10"></textarea></label>
+
+      <div style="display:flex;gap:.5rem;margin-top:.5rem;">
+        <button type="submit">Submit enquiry</button>
+        <button type="button" id="enquiryReset">Reset</button>
+      </div>
+
+      <div id="enquiryResult" aria-live="polite" style="margin-top:.5rem;"></div>
+    </form>
+  </main>
+
+  <footer>
+    <nav aria-label="Footer">
+      <ul class="nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="products_services.html">Products & Services</a></li>
+        <li><a href="contact_us.html">Contact</a></li>
+      </ul>
+    </nav>
+    <p>&copy; 2025 Flow with Dignity</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Enquiry form client-side validation + simulated response
+    (function(){
+      const form = document.getElementById('enquiryForm');
+      const res = document.getElementById('enquiryResult');
+      document.getElementById('enquiryReset').addEventListener('click', ()=> form.reset());
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        res.textContent = '';
+        const fd = new FormData(form);
+        const name = fd.get('name').trim();
+        const email = fd.get('email').trim();
+        const type = fd.get('type');
+        const message = fd.get('message').trim();
+
+        if(name.length < 2){ res.style.color='red'; res.textContent='Please enter your name.'; return; }
+        if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ res.style.color='red'; res.textContent='Please enter a valid email.'; return; }
+        if(!type){ res.style.color='red'; res.textContent='Please select an enquiry type.'; return; }
+        if(message.length < 10){ res.style.color='red'; res.textContent='Message must be at least 10 characters.'; return; }
+
+    
+        res.style.color='green'; res.textContent = 'Processing...';
+        setTimeout(()=>{
+          if(type === 'service') res.textContent = 'Estimated: R200 per pack. Availability: In stock. We will email details to ' + email + '.';
+          else if(type === 'volunteer') res.textContent = 'Volunteer slots open next month. We will send onboarding info to ' + email + '.';
+          else if(type === 'sponsor') res.textContent = 'Sponsorship packages available. We will send details to ' + email + '.';
+          else res.textContent = 'Thank you for reaching out about a partnership. We will contact you soon at ' + email + '.';
+          form.reset();
+        }, 900);
+      });
+    })();
+  </script>
+</body>
+</html>
